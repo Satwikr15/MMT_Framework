@@ -1,5 +1,6 @@
-package MMT_Testcases.SearchFlightTestCases;
+package MMT_Objects.BaseClass;
 
+import MMT_Objects.Pages.SearchFlights;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
+/**
+ * This Base class contains Browser setup and navigating to Home page of "Make my trip" Website
+ * */
 public class Base_Class {
     WebDriver driver;
     public SearchFlights sfo;
