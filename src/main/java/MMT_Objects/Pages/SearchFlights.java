@@ -1,6 +1,7 @@
 package MMT_Objects.Pages;
 
 import MMT_Objects.BaseClass.Base_Class;
+import MMT_Objects.Utils.LocatorUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,45 +13,50 @@ import java.time.Duration;
  * */
 public class SearchFlights extends Base_Class {
     WebDriver driver;
+    private LocatorUtil locatorUtil;
 
     public SearchFlights(WebDriver driver) {
     this.driver=driver;
+        this.locatorUtil = new LocatorUtil("src/main/java/MMT_Objects/Locators.properties");
     }
 
-    By Flightmode=By.xpath("//span[@class='chNavIcon appendBottom2 chSprite chFlights active']");
+//    By Flightmode=By.xpath("//span[@class='chNavIcon appendBottom2 chSprite chFlights active']");
+//
+//    By OneWayTrip=By.xpath("//ul//li[@data-cy='roundTrip']");
+//
+//    By FromCity=By.id("fromCity");
+//    By ToCity=By.id("toCity");
+//    By SearchBar=By.xpath("//input[@aria-controls='react-autowhatever-1']");
+//    By Suggested_city =By.xpath("//div[@class='makeFlex appendTop12  forHideundefined']");
+//
+//    By TravelClassBtn=By.xpath("//span[@class='lbl_input appendBottom5']");
+//    By TravelClassApply=By.xpath("//button[@class='primaryBtn btnApply pushRight']");
+//
+//    By SearchBtn=By.xpath("//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']");
 
-    By OneWayTrip=By.xpath("//ul//li[@data-cy='roundTrip']");
 
-    By FromCity=By.id("fromCity");
-    By ToCity=By.id("toCity");
-    By SearchBar=By.xpath("//input[@aria-controls='react-autowhatever-1']");
-    By Suggested_city =By.xpath("//div[@class='makeFlex appendTop12  forHideundefined']");
-
-    By TravelClassBtn=By.xpath("//span[@class='lbl_input appendBottom5']");
-    By TravelClassApply=By.xpath("//button[@class='primaryBtn btnApply pushRight']");
-
-    By SearchBtn=By.xpath("//a[@class='primaryBtn font24 latoBold widgetSearchBtn ']");
     public void Check_FlightMode(){
-        WebElement flight=driver.findElement(Flightmode);
+        WebElement flight=driver.findElement(locatorUtil.getLocator("Flightmode"));
         flight.click();
     }
 
     public void TypeofTrip(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement roundTripElement = wait.until(ExpectedConditions.visibilityOfElementLocated(OneWayTrip));
+        By OneWayTripLocator =locatorUtil.getLocator("OneWayTrip");
+        WebElement roundTripElement = wait.until(ExpectedConditions.visibilityOfElementLocated(OneWayTripLocator));
         roundTripElement.click();
     }
 
     public void chooseBoardingAndDestination(String fromcity,String tocity) throws InterruptedException {
-        Selectcity(FromCity,fromcity);
-        Selectcity(ToCity,tocity);
+        Selectcity(locatorUtil.getLocator("FromCity"),fromcity);
+        Selectcity(locatorUtil.getLocator("ToCity"),tocity);
     }
     public void Selectcity(By cityLocator,String cityname) throws InterruptedException {
         WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(2000));
         driver.findElement(cityLocator).click();
         Thread.sleep(2000);
-        driver.findElement(SearchBar).sendKeys(cityname);
-        WebElement suggestion = wait.until(ExpectedConditions.visibilityOfElementLocated(Suggested_city));
+        driver.findElement(locatorUtil.getLocator("SearchBar")).sendKeys(cityname);
+        WebElement suggestion = wait.until(ExpectedConditions.visibilityOfElementLocated(locatorUtil.getLocator("Suggested_city")));
         suggestion.click();
     }
     public void BookingDates(String FromDate,String ToDate) throws InterruptedException {
@@ -66,7 +72,7 @@ public class SearchFlights extends Base_Class {
 
 public void Travelclass(String adults, String children, String infants,String travelclass) throws InterruptedException {
     // Open the travel class selection
-    driver.findElement(TravelClassBtn).click();
+    driver.findElement(locatorUtil.getLocator("TravelClassBtn")).click();
     Thread.sleep(2000);
 
     // Call the SelectPassengers method to choose the number of passengers like adults,children,infants and selecting travelclass
@@ -74,12 +80,14 @@ public void Travelclass(String adults, String children, String infants,String tr
 
     // Scroll to the 'Apply' button
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    WebElement applyButton = driver.findElement(TravelClassApply);
+    WebElement applyButton = driver.findElement(locatorUtil.getLocator("TravelClassApply"));
     js.executeScript("arguments[0].scrollIntoView(true);", applyButton); // Scroll to the element
-    js.executeScript("window.scrollBy(0, 5000);"); // Extra scrolling if needed
+    js.executeScript("window.scrollBy(0, 100);");
+    Thread.sleep(2000);
+    // Extra scrolling if needed
     // Wait until the 'Apply' button is clickable, then click it
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-    wait.until(ExpectedConditions.elementToBeClickable(TravelClassApply)).click();
+    wait.until(ExpectedConditions.elementToBeClickable(locatorUtil.getLocator("TravelClassApply"))).click();
 }
 
     // Method for selecting passengers
@@ -110,7 +118,7 @@ public void Travelclass(String adults, String children, String infants,String tr
     }
 
     public void Searchbtn(){
-        driver.findElement(SearchBtn).click();
+        driver.findElement(locatorUtil.getLocator("SearchBtn")).click();
         System.out.println("Today's task completed");
     }
 }
