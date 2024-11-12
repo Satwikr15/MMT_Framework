@@ -40,7 +40,7 @@ public class Main {
             boolean found = false;
             while((line= reader.readLine())!=null){
                 String[] row=line.split(",");
-                //System.out.println(row[0]);  // writtens all name column
+                //System.out.println(row[0]);  // writtens name of column
                 if(row[columnIndex].equalsIgnoreCase(inputValue)){
                     System.out.println("found your name: "+ inputValue+" in column "+ columnName);
                     //System.out.println(row[1]); // to print details of that person
