@@ -94,6 +94,7 @@ public class Operations {
         int empNameIndex = columnMap.getOrDefault("emp_name", -1);
         if (empNameIndex == -1) {
             System.out.println("Column 'emp_name' not found in the file.");
+            return;
         }
 
         // Read each row and keep only those that don't match the emp_name to be deleted
@@ -110,6 +111,7 @@ public class Operations {
 
         if (!deleted) {
             System.out.println("Employee name '" + emp_name + "' not found.");
+            return;
         }
 
         // Rewrite the file with remaining rows
@@ -125,9 +127,11 @@ public class Operations {
         e.printStackTrace();
     }
 }
-    public void aboutvalue(String filename,String columnname,String name,String Targetcolumn){
+    public String aboutvalue(String filename,String columnname,String name,String Targetcolumn){
     String fileName = filename+".csv"; // path of required file
     List<String> rows = new ArrayList<>();
+    String result = "";
+    Boolean get=false;
     try(BufferedReader reader=new BufferedReader(new FileReader(fileName))){
         String headerLine = reader.readLine();
         rows.add(headerLine);
@@ -141,15 +145,15 @@ public class Operations {
         int empNameIndex = columnMap.getOrDefault(columnname.toLowerCase(), -1);
         int targetcolumnIndex=columnMap.getOrDefault(Targetcolumn.toLowerCase(),-1);
         if (empNameIndex == -1 || targetcolumnIndex == -1) {
-            System.out.println("Required columns not found in the file.");
-            return;
+            result="Required columns not found in the file.";
+            return result;
         }
         String line;
-        Boolean get=false;
+
         while((line=reader.readLine())!=null){
             String[] row = line.split(",");
             if (row[empNameIndex].equalsIgnoreCase(name)) {
-                System.out.println(row[targetcolumnIndex]);
+                result=row[targetcolumnIndex];
                 get=true;
                 break; // if found it , breaks the loop
             }
@@ -163,5 +167,6 @@ public class Operations {
     } catch (IOException e) {
         throw new RuntimeException(e);
     }
+    return result;
 }
 }
