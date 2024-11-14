@@ -1,7 +1,3 @@
-Emp_name,Emp_id,Emp_father,Emp_no
-Satwik,1110,Prasad,1234567890
-Rohit,1111,raju,987654321
-Nikhil,1112,rao,8765432112
-Nikunj,1113,prabha,1234567890
-Anup,1114,nagarjuna,9876543212
-Rahul,1115,charan,123456798
+emp_name, emp_id,emp_father,emp_no
+Satwik,1110,prasad,987656789
+Rohit,1111,rao,987654321
