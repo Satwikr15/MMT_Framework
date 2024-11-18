@@ -5,12 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import MMT_Objects.Pages.*;
-import MMT_Objects.BaseClass.*;
 
-public class SearchFlightsTestCases extends Base_Class {
+public class SearchFlights_SD extends Base_Class {
 
     @Given("User in HomePage of MakeMyTrip")
     public void User_in_HomePage_of_MakeMyTrip() {

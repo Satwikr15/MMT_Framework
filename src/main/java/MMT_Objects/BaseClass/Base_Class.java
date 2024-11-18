@@ -1,6 +1,7 @@
 package MMT_Objects.BaseClass;
 
-import MMT_Objects.Pages.SearchFlights;
+import MMT_Objects.Pages.SearchFlights_PO;
+import MMT_Objects.Utils.WaitUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,14 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 /**
  * This Base class contains Browser setup and navigating to Home page of "Make my trip" Website
  * */
 public class Base_Class {
     WebDriver driver;
-    public SearchFlights sfo;
+    public SearchFlights_PO sfo;
+    WaitUtil waitUtil;
     public void browsersetup(){
 
         WebDriverManager.chromedriver().setup();
@@ -29,6 +30,8 @@ public class Base_Class {
         WebElement closeButton=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='commonModal__close']")));
         closeButton.click();
 
-        sfo=new SearchFlights(driver);
+        sfo=new SearchFlights_PO(driver);
+        waitUtil = new WaitUtil(driver);
     }
+
 }

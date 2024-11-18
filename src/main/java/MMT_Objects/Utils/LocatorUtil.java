@@ -1,6 +1,7 @@
 package MMT_Objects.Utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -7,5 +7,5 @@ Feature: Flight Search on MakeMyTrip
     And User Selects Boarding at "Mumbai" to "Pune"
     And User Selects the Booking dates from "Nov 15 2024" and "Dec 12 2024"
     And User Chooses the travel class with "2" Adults, "0" Children, and "0" Infants and "First Class" Class
-    And User applies "Student" Special Fare
+    And User applies "Senior Citizen" Special Fare
     Then User Clicks on search btn for flights
