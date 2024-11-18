@@ -39,44 +39,6 @@ public class Operations {
         return found;
 
     }
-    public boolean read(String fileName,String columnName, String inputValue,String Targetcolumn){
-
-        String File = fileName+".csv"; //path of file
-        BufferedReader reader=null;
-        String line="";
-        boolean found = false;
-        try{
-            reader=new BufferedReader(new FileReader(File));
-            // Read the header to map column names to their indexes
-            String headerLine = reader.readLine();
-            String[] header = headerLine.split(",");
-
-            // Create a map of column names to their index positions
-            Map<String, Integer> columnMap = new HashMap<>();
-            for (int i = 0; i < header.length; i++) {
-                columnMap.put(header[i].trim().toLowerCase(), i);
-            }
-            int columnIndex = columnMap.get(columnName.toLowerCase());// assigning columnindex to columnname
-            int targetcolumnIndex=columnMap.getOrDefault(Targetcolumn.toLowerCase(),-1);
-            // Search for the input value in the selected column
-
-            while((line= reader.readLine())!=null){
-                String[] row=line.split(",");
-                //System.out.println(row[0]);  // writtens all name column
-                if(row[columnIndex].equalsIgnoreCase(inputValue)){
-                    System.out.println("found your name: "+ inputValue+" in column : "+ columnName);
-                    System.out.println(row[targetcolumnIndex]); // to print details of that person
-                    found=true;
-                    break;
-                }
-            }
-            if(!found)
-                System.out.println("not found name in "+columnName+ " column");
-        }catch (Exception E){
-            E.printStackTrace();
-        }
-        return found;
-    }
     public void deleterow(String filename,String emp_name){
     String fileName = filename+".csv"; // path of required file
     List<String> rows = new ArrayList<>();
